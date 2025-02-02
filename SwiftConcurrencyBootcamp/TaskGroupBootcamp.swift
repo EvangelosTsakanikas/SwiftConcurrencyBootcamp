@@ -40,7 +40,7 @@ class TaskGroupBootcampDataManager {
             }
             
             for try await image in group {
-                if let image = image {                
+                if let image = image {
                     images.append(image)
                 }
             }
