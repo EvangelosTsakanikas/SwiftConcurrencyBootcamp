@@ -21,7 +21,7 @@ final class StrongSelfBootcampViewModel: ObservableObject {
     
     private var someTask: Task<Void, Never>? = nil
     private var myTasks: [Task<Void, Never>] = []
-        
+    
     func cancelTasks() {
         someTask?.cancel()
         someTask = nil
@@ -67,7 +67,7 @@ final class StrongSelfBootcampViewModel: ObservableObject {
             self.data = await dataService.getData()
         }
     }
-
+    
     func updateData6() {
         let task1 = Task {
             self.data = await dataService.getData()
@@ -79,7 +79,7 @@ final class StrongSelfBootcampViewModel: ObservableObject {
         }
         myTasks.append(task2)
     }
-
+    
     // We purposely do not cancel tasks to keep strong references
     func updateData7() {
         Task {
@@ -88,6 +88,10 @@ final class StrongSelfBootcampViewModel: ObservableObject {
         Task.detached {
             self.data = await self.dataService.getData()
         }
+    }
+    
+    func updateData8() async {
+        self.data = await self.dataService.getData()
     }
 }
 
@@ -102,6 +106,9 @@ struct StrongSelfBootcamp: View {
             }
             .onDisappear {
                 viewModel.cancelTasks()
+            }
+            .task {
+                await viewModel.updateData8()
             }
     }
 }
