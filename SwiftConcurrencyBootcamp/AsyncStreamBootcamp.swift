@@ -56,7 +56,7 @@ final class AsyncStreamBootcampViewModel: ObservableObject {
                     currentNumber = value
                 }
             } catch {
-                print(error) 
+                print(error)
             }
         }
         
